@@ -1,0 +1,16 @@
+[package]
+name = "goldberg"
+description = "A Rust-based obfuscation macro library!"
+repository = "https://github.com/frank2/goldberg"
+version = "0.1.0"
+authors = ["frank2@dc949.org"]
+edition = "2021"
+license = "GPL-3.0"
+keywords = ["obfuscation"]
+readme = "README.md"
+exclude = ["*~", "#*", "src/#*", "notes.org"]
+documentation = "https://docs.rs/goldberg"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
