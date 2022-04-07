@@ -17,4 +17,5 @@ proc-macro = true
 [dependencies]
 proc-macro2 = "1.0.36"
 quote = "1.0.17"
-syn = "1.0.89"
+rand = "0.8.5"
+syn = { path = "C:/cygwin64/home/purple/local/doc/git/github/frank2/syn", features = ["full", "extra-traits"] } # { version = "1.0.89", features = ["full", "extra-traits"] }
