@@ -15,7 +15,8 @@ documentation = "https://docs.rs/goldberg"
 proc-macro = true
 
 [dependencies]
+moisture = "0.1.0"
 proc-macro2 = "1.0.36"
 quote = "1.0.17"
 rand = "0.8.5"
-syn = { path = "C:/cygwin64/home/purple/local/doc/git/github/frank2/syn", features = ["full", "extra-traits"] } # { version = "1.0.89", features = ["full", "extra-traits"] }
+syn = { version = "1.0.91", features = ["full", "extra-traits"] }
