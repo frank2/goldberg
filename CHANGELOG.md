@@ -1,3 +1,6 @@
 # Changelog
 ## 0.1.0
-* created the library!
+### Features
+* initial release!
+* created the `goldberg_stmts`, `goldberg_string` and `goldberg_int` macros.
+* created the `goldberg_stringify` macro.
