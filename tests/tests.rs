@@ -1,25 +1,25 @@
 use goldberg::*;
 
 #[test]
-fn test_goldberg() {
-    let result = goldberg! {
+fn test_stmts() {
+    let result = goldberg_stmts! {
         {
             fn fake_random(value: u32) -> u32 {
                 match value {
-                    1 => 42,
-                    2 => 64,
-                    3 => 31337,
-                    _ => 0,
+                    1 => 42u32,
+                    2 => 64u32,
+                    3 => 31337u32,
+                    _ => 0u32,
                 }
             }
 
-            let x = fake_random(1);
-            let y = fake_random(2);
-            let mut z = 0u32;
+            let x: u32 = fake_random(1);
+            let y: u32 = fake_random(2);
+            let z: u32;
 
             z = x ^ y;
             z ^= fake_random(3);
-            z += 420;
+            z += 420u32;
 
             z
         }
@@ -28,10 +28,9 @@ fn test_goldberg() {
     assert_eq!(result, 31655);
 }
 
-/*
 #[test]
 fn test_advent() {
-    goldberg! {
+    goldberg_stmts! {
         use std::collections::HashSet;
 
         #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
@@ -61,16 +60,17 @@ fn test_advent() {
         }
 
         fn read_origami(data: String) -> Result<(HashSet<Coordinate>, Vec<(Axis,usize)>), ()> {
-            let mut coords = HashSet::<Coordinate>::new();
-            let mut instructions = Vec::<(Axis,usize)>::new();
-            let lines: Vec<String> = data.split("\n").map(|x| x.to_string()).collect();
-            let mut index = 0usize;
+            let mut coords: HashSet<Coordinate> = HashSet::<Coordinate>::new();
+            let mut instructions: Vec<(Axis, usize)> = Vec::<(Axis,usize)>::new();
+            let split_char: String = String::from("\n");
+            let lines: Vec<String> = data.split(split_char.as_str()).map(|x| x.to_string()).collect();
+            let mut index: usize = 0usize;
             
             'coords: for i in 0..lines.len() {
                 index = i;
                 
-                let line = &lines[index];
-                let size = line.len();
+                let line: String = lines[index].clone();
+                let size: usize = line.len();
                 if size == 0 || size == 1 { break 'coords; }
 
                 let coord: Vec<usize> = line.trim().split(",").map(|x| x.parse().unwrap()).collect();
@@ -80,8 +80,8 @@ fn test_advent() {
             if coords.len() == 0 { return Err(()); }
 
             'folds: for i in index+1..lines.len() {
-                let line = &lines[i];
-                let size = line.len();
+                let line: String = lines[i].clone();
+                let size: usize = line.len();
                 
                 if size == 0 { break 'folds; }
                 if size == 1 { continue 'folds; }
@@ -119,16 +119,18 @@ fn test_advent() {
         }
 
         fn print_dots(coords: &HashSet<Coordinate>) -> String {
-            let (mut mx, mut my) = (0usize, 0usize);
+            let mut mx: usize = 0usize;
+            let mut my: usize = 0usize;
 
             for coord in coords {
-                let (nx,ny) = (coord.0,coord.1);
+                let nx: usize = coord.0;
+                let ny: usize = coord.1;
 
                 if nx+1>mx { mx=nx+1; }
                 if ny+1>my { my=ny+1; }
             }
 
-            let mut buffer = vec![vec![' '; mx]; my];
+            let mut buffer: Vec<Vec<char>> = vec![vec![' '; mx]; my];
             
             for coord in coords {
                 let (x,y) = (coord.0,coord.1);
@@ -140,7 +142,7 @@ fn test_advent() {
 
             lines.join("\n")
         }
-    }.as_bytes());
+    }
 
     let file_data = std::fs::read("tests/origami-input.txt").unwrap();
     let string_data = std::str::from_utf8(file_data.as_slice()).unwrap();
@@ -163,7 +165,15 @@ fn test_advent() {
 }
 
 #[test]
-fn test_literal() {
-    let value = goldberg_int!(0u16);
+fn test_int() {
+    let value = goldberg_int!(0xDEADBEEFu32);
+
+    assert_eq!(value, 0xDEADBEEF);
 }
-*/
+
+#[test]
+fn test_string() {
+    let string = String::from(goldberg_string!("This is an encrypted string!"));
+
+    assert_eq!(string, "This is an encrypted string!");
+}
